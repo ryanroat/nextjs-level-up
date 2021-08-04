@@ -1,9 +1,22 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { withApollo } from '../lib/apollo'
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 import Layout from '../components/Layout'
 import styles from '../styles/Home.module.css'
+import { load } from '@apollo/protobufjs'
 
-export default function Home() {
+const HELLO_QUERY = gql`
+  query HelloQuery {
+    sayHello
+  }
+`
+
+const Home = () => {
+  // const { data, loading, error } = useQuery(HELLO_QUERY)
+  // if (loading) return <div />
+  // console.log(data);
   return (
     <Layout className={styles.container}>
 
@@ -63,3 +76,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default withApollo(Home)
